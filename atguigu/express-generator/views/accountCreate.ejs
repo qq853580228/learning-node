@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>accountCreate</title>
+  <style>
+    .container {
+      margin: auto;
+      max-width: 600px;
+    }
+    .row {
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h2>添加记录</h2>
+    <hr>
+    <form action="/account" method="post">
+      <div class="row">
+        <label for="matter">事项：</label>
+        <input id="matter" type="text" name="matter" />
+      </div>
+      <div class="row">
+        <label for="date">发生时间：</label>
+        <input id="date" type="date" name="date" />
+      </div>
+      <div class="row">
+        <label for="type">类型：</label>
+        <select id="type" name="type">
+          <option value="1">收入</option>
+          <option value="2">支出</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="amount">金额：</label>
+        <input id="amount" type="number" name="amount" />
+      </div>
+      <div class="row">
+        <label for="remark">备注：</label>
+        <textarea id="remark" type="text" name="remark"></textarea>
+      </div>
+      <hr>
+      <button>添加</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>accountList</title>
+  <style>
+    .container {
+      margin: auto;
+      max-width: 600px;
+    }
+    .list {
+      padding: 0;
+      list-style: none;
+    }
+    .item {
+      margin-bottom: 12px;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 20px;
+      padding-right: 20px;
+      line-height: 36px;
+      font-size: 12px;
+    }
+    .header-success {
+      color: #b3fcce;
+      background: #37bc25;
+    }
+    .header-danger {
+      color: #f72c2c;
+      background: #f6a7a7;
+    }
+    .content {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .remark {
+      padding-right: 20px;
+      flex: 2;
+    }
+    .type {
+      padding: 0 4px;
+      height: 20px;
+      line-height: 20px;
+      /* flex: 1; */
+      font-size: 10px;
+      color: #fff;
+      border-radius: 6px;
+    }
+    .type-danger {
+      background: orange;
+    }
+    .type-success {
+      background: rgb(163, 237, 163);
+    }
+    .amount {
+      flex: 1;
+      text-align: right;
+      color: #333;
+      font-size: 12px;
+    }
+    .delete {
+      display: none;
+      cursor: pointer;
+      color: red;
+    }
+    .item:hover .delete {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h2>记账本</h2>
+    <hr>
+    <ul class="list">
+      <% accountList.forEach(item => { %>
+        <li class="item">
+          <header class="header <%= item.type === '1' ? 'header-success' : 'header-danger' %>">
+            <div><%= item.date %></div>
+            <a href="/account/<%= item.id %>" class="delete">删除</a>
+          </header>
+          <div class="content">
+            <div class="remark"><%= item.matter %></div>
+            <div class="type <%= item.type === '1' ? 'type-success' : 'type-danger' %>"><%= item.type === '1' ? '收入' : '支出' %></div>
+            <div class="amount"><%= item.amount %>元</div>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  </main>
+</body>
+</html>

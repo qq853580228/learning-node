@@ -1,0 +1,8 @@
+{
+  "name": "bls-node-tools",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "bls 学习 node 过程发布的包，关于时间格式化和 HTMLEscape 的功能",
+  "keywords": ["bls", "dateFormat", "excape"],
+  "license": "ISC"
+}
