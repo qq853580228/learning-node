@@ -2,6 +2,7 @@ var express = require('express');
 const { formidable } = require('formidable');
 var router = express.Router();
 const { insert, query, remove } = require('../data/index');
+const { getAccounts, accountDelete, accountInsert } = require('../db/models/account');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,7 +11,15 @@ router.get('/', function(req, res, next) {
 
 // 记账本的列表
 router.get('/account', function(req, res) {
-  res.render('accountList', { accountList: query('accounts') });
+  getAccounts().then(data => {
+    console.log('getAccounts success', data);
+    res.render('accountList', { accountList: data });
+  })
+  .catch(err => {
+    console.log('getAccounts err', err);
+  });
+
+  // res.render('accountList', { accountList: query('accounts') });
 });
 
 // 添加记账本页面
@@ -20,15 +29,29 @@ router.get('/account/create', function(req, res) {
 
 // 添加记账本
 router.post('/account', function(req, res) {
-  insert('accounts', { id: Date.now().toString(), ...req.body });
+  accountInsert({ id: Date.now().toString(), ...req.body }).then(data => {
+    console.log('accountInsert success', data);
+    res.render('success', { msg: '添加成功！', url: '/account' });
+  })
+  .catch(err => {
+    console.log('accountInsert err', err);
+  });
+  // insert('accounts', { id: Date.now().toString(), ...req.body });
+  // res.render('success', { msg: '添加成功！', url: '/account' });
   // res.send('添加成功');
-  res.render('success', { msg: '添加成功！', url: '/account' });
 });
 
 // 删除记账本
 router.get('/account/:id', function(req, res) {
-  remove('accounts', req.params.id);
-  res.render('success', { msg: '删除成功！', url: '/account' });
+  accountDelete(req.params.id).then(data => {
+    console.log('accountDelete success', data);
+    res.render('success', { msg: '删除成功！', url: '/account' });
+  })
+  .catch(err => {
+    console.log('accountDelete err', err);
+  });
+  // remove('accounts', req.params.id);
+  // res.render('success', { msg: '删除成功！', url: '/account' });
 });
 
 router.get('/portrait', (req, res) => {
